@@ -1,0 +1,11 @@
+.env
+.env.*
+!.env.example
+node_modules/
+__pycache__/
+.preview-cache/
+*.log
+profile.private.json
+concepts_brief.md
+docs/egm-review.md
+preview/concepts.html

@@ -1,0 +1,36 @@
+<svg width="1100" height="550" viewBox="0 0 1100 550" role="img" aria-labelledby="workshop-svg-title workshop-desc" xmlns="http://www.w3.org/2000/svg">
+      <title id="workshop-svg-title">Santhosh's Midnight Workshop</title>
+      <desc id="workshop-desc">An amber and violet workshop for security platforms, agentic systems, and developer tools. The lamp glows briefly, then rests. Equivalent text follows in the README.</desc>
+      <style>.pulse { animation: glow 4s ease-out 1; } .beam { animation: lamp 4s ease-out 1; } .trace { stroke-dasharray:120; animation: trace 4s ease-out 1; } @keyframes glow { 0% { opacity:0; } 45% { opacity:.25; } 100% { opacity:1; } } @keyframes lamp { 0% { opacity:0; } 25% { opacity:.18; } 65% { opacity:.06; } 100% { opacity:.09; } } @keyframes trace { from { stroke-dashoffset:120; } to { stroke-dashoffset:0; } } @media (prefers-reduced-motion:reduce) { * { animation:none!important; } }</style>
+<defs>
+        <radialGradient id="roomglow"><stop stop-color="#443044"/><stop offset="1" stop-color="#15171d"/></radialGradient>
+        <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="#ffffff" stroke-opacity=".035"/></pattern>
+        <linearGradient id="screen" x2="1" y2="1"><stop stop-color="#5c4576"/><stop offset="1" stop-color="#29283f"/></linearGradient>
+      </defs>
+      <rect width="1100" height="550" fill="#15171d"/><rect width="1100" height="550" fill="url(#roomglow)"/><rect width="1100" height="550" fill="url(#grid)"/>
+      <g font-family="monospace" font-size="12" fill="#b3a8b7"><text x="42" y="42">SAN / MIDNIGHT WORKSHOP</text><text x="840" y="42">CURIOSITY, PUT TO WORK.</text></g>
+      <text x="45" y="130" fill="#f6ecdf" font-family="system-ui,sans-serif" font-size="55" font-weight="600" letter-spacing="-2">Hi, I'm Santhosh.</text>
+      <text x="48" y="165" fill="#b9aebd" font-family="system-ui,sans-serif" font-size="17">AI agents. Security systems. Useful tools.</text>
+      <g stroke-linejoin="round">
+        <path d="M320 363 648 194 980 360 648 520Z" fill="#292430" stroke="#64516a"/>
+        <path d="M320 363V380L648 540V520Z" fill="#1c1b23"/>
+        <path d="M648 520 980 360V378L648 540Z" fill="#24202b"/>
+        <path d="M400 324 650 202 904 329 653 451Z" fill="#564052" stroke="#98718a"/>
+        <path d="M400 324V340L653 467V451Z" fill="#342d3a"/><path d="M653 451 904 329V345L653 467Z" fill="#453442"/>
+        <path d="M440 345V409L456 417V353Z M845 357V413L861 405V349Z" fill="#8e6478"/>
+        <path d="M590 301 674 258 758 301 674 343Z" fill="#241e30" stroke="#916b9d"/>
+        <path d="M654 272V220L675 230V282Z" fill="#827090"/>
+        <path d="M579 147 765 239V321L579 230Z" fill="#b19aae" stroke="#e7b8ce" stroke-width="2"/>
+        <path d="M590 162 753 243V303L590 222Z" fill="url(#screen)"/>
+        <path d="M605 183 647 204 M605 195 700 242 M605 208 672 241" stroke="#f6bb78" stroke-width="4" class="trace"/>
+        <path d="M610 298 695 340 650 362 565 321Z" fill="#9a7e97"/><path d="M604 309 675 344 M590 317 661 352" stroke="#49334d" stroke-width="3"/>
+        <path d="M458 304 500 282 545 304 502 326Z" fill="#302c37" stroke="#b59b99"/>
+        <path d="M501 303V223L550 197" stroke="#cfba9f" stroke-width="5" fill="none"/>
+        <path d="M531 180 558 190 570 219 524 197Z" fill="#f5b774"/>
+        <path d="M548 211 583 294 474 290Z" fill="#ffd48d" opacity=".09" class="beam"/>
+        <path d="M768 352 809 331 845 349 804 371Z" fill="#e6d6b7"/><path d="M777 353 808 339 M790 358 818 345" stroke="#8e7165" stroke-width="2"/>
+        <path d="M817 273V251L837 241 857 251V273L837 284Z" fill="#986c72"/><path d="M836 249V206 M837 233 816 217 M837 223 855 203" stroke="#9baa82" stroke-width="6"/>
+      </g>
+      <g font-family="monospace" font-size="12"><text x="48" y="264" fill="#f8bb79">ON THE WORKBENCH</text><text x="48" y="296" fill="#ddd3db">01   Security platforms</text><text x="48" y="324" fill="#ddd3db">02   Agentic systems</text><text x="48" y="352" fill="#ddd3db">03   Developer tools</text><text x="48" y="458" fill="#9b929f">IDEAS → SYSTEMS → TOOLS</text></g>
+      <circle cx="925" cy="477" r="4" fill="#f8bb79" class="pulse"/><text x="941" y="481" font-family="monospace" font-size="11" fill="#c3a8b5">KEEP MAKING.</text>
+    </svg>

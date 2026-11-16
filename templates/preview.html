@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{NAME}} / Midnight Workshop</title>
+<style>
+:root { color-scheme:dark; --bg:#101116; --panel:#19191f; --ink:#f1ebe6; --muted:#b1a7b8; --line:#37313e; --accent:#f0ba79; }
+:root[data-theme=light] { color-scheme:light; --bg:#fffdf9; --panel:#f7f3ed; --ink:#302b38; --muted:#6d6071; --line:#d9cdd8; --accent:#925b2a; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.65 system-ui,sans-serif; }
+main { max-width:1040px; padding:30px 28px 64px; margin:auto; }
+header { display:flex; justify-content:space-between; gap:16px; align-items:center; margin-bottom:22px; }
+.eyebrow { font:11px/1.5 ui-monospace,monospace; letter-spacing:.13em; text-transform:uppercase; color:var(--accent); }
+button { background:var(--panel); border:1px solid var(--line); color:var(--ink); padding:9px 13px; border-radius:8px; cursor:pointer; }
+button:focus-visible,a:focus-visible,summary:focus-visible { outline:3px solid var(--accent); outline-offset:4px; }
+.controls { display:flex; gap:8px; }
+img { display:block; width:100%; height:auto; }
+h1 { font-size:clamp(27px,4vw,38px); line-height:1.2; letter-spacing:-.035em; margin:32px 0 18px; }
+.bio { max-width:760px; font-size:18px; color:var(--muted); }
+a { color:var(--accent); text-underline-offset:4px; }
+.jump { font-size:14px; margin:22px 0 40px; }
+h2 { font-size:23px; letter-spacing:-.02em; border-bottom:1px solid var(--line); padding-bottom:12px; margin:34px 0 16px; }
+h3 { font-size:22px; line-height:1.35; margin:8px 0 12px; }
+p { margin:0 0 16px; }
+.muted { color:var(--muted); }
+article { padding:23px 0 25px; border-bottom:1px solid var(--line); }
+article:last-child { border-bottom:0; }
+article p { color:var(--muted); max-width:810px; }
+.tags { display:flex; flex-wrap:wrap; gap:8px; }
+.tags span { background:var(--panel); border:1px solid var(--line); border-radius:5px; padding:3px 9px; font:12px/1.5 ui-monospace,monospace; }
+details { margin:20px 0; color:var(--muted); }
+summary { cursor:pointer; color:var(--ink); }
+table { border-collapse:collapse; width:100%; margin-top:16px; }
+td,th { padding:7px 12px; border-bottom:1px solid var(--line); text-align:left; }
+td:last-child,th:last-child { text-align:right; }
+footer { border-top:1px solid var(--line); margin-top:36px; padding-top:25px; font-size:14px; }
+.caption { font-size:12px; color:var(--muted); margin-top:12px; }
+@media(max-width:560px) { main { padding:18px 16px 40px; } header { align-items:flex-start; } header>.eyebrow { max-width:130px; } .controls { flex-wrap:wrap; justify-content:flex-end; } button { font-size:11px; } .bio { font-size:16px; } h3 { font-size:20px; } }
+</style>
+</head>
+<body><main>
+<header><div class="eyebrow">Midnight Workshop / Profile preview</div><div class="controls"><button id="theme" type="button" aria-pressed="false">Light theme</button><button id="motion" type="button" aria-pressed="false">Static artwork</button></div></header>
+<img id="cover" src="../assets/workshop-dark.svg" alt="Santhosh's illustrated workshop: AI agents, security systems, and developer tools." width="1100" height="550">
+<h1>{{HEADLINE}}</h1><p class="bio">{{BIO}}</p>
+<p class="jump"><a href="#workbench">Explore the workbench</a> &nbsp;·&nbsp; <a href="#languages">See the materials</a> &nbsp;·&nbsp; <a href="../README.md">View README source</a></p>
+<section id="workbench"><h2>On the workbench</h2><p class="muted">Most of my work lives in private repositories. Here is a window into what I build.</p>{{CARDS}}</section>
+<section id="languages"><h2>Languages on the workbench</h2><img id="languages-image" src="../assets/languages-dark.svg" alt="Language shares by detected bytes, with values in the expandable table." width="1100" height="220"><details><summary>Read the numbers and how they are measured</summary><table><thead><tr><th>Language</th><th>Share of detected bytes</th></tr></thead><tbody>{{ROWS}}</tbody></table><p class="caption">Snapshot: {{DATE}}. {{COUNT}} selected private repositories. Not proficiency or time spent. Similar code across repositories may be counted more than once. Small languages are grouped as Other; percentages are rounded.</p></details></section>
+<section><h2>Tools I work with</h2><div class="tags">{{STACK}}</div><details><summary>Elsewhere in the workshop</summary><ul>{{NOTES}}</ul></details></section>
+<footer><p><strong>The thread through it all:</strong> turning complex systems into tools people can use.</p><p class="muted">Hand-drawn in SVG. Built from a curated snapshot of my work. <a href="https://github.com/{{HANDLE}}">Find me on GitHub</a>.</p><p class="caption">This local preview uses the actual profile assets and content. GitHub controls the final Markdown typography and spacing; these preview controls are not part of the README.</p></footer>
+</main>
+<script>
+const params=new URLSearchParams(location.search);
+let light=params.get('theme')==='light';
+let still=params.get('static')==='1'||matchMedia('(prefers-reduced-motion: reduce)').matches;
+function update(){
+  const tone=light?'light':'dark';document.documentElement.dataset.theme=tone;
+  document.querySelector('#cover').src='../assets/workshop-'+(still?'static-':'')+tone+'.svg';
+  document.querySelector('#languages-image').src='../assets/languages-'+tone+'.svg';
+  const theme=document.querySelector('#theme'),motion=document.querySelector('#motion');
+  theme.textContent=light?'Dark theme':'Light theme';theme.setAttribute('aria-pressed',String(light));
+  motion.textContent=still?'Play intro':'Static artwork';motion.setAttribute('aria-pressed',String(still));
+}
+document.querySelector('#theme').addEventListener('click',()=>{light=!light;update();});
+document.querySelector('#motion').addEventListener('click',()=>{still=!still;update();});update();
+</script>
+</body></html>
