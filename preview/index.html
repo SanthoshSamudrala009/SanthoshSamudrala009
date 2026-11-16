@@ -4,49 +4,63 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Santhosh / Midnight Workshop</title>
 <style>
-:root { color-scheme:dark; --bg:#101116; --panel:#19191f; --ink:#f1ebe6; --muted:#b1a7b8; --line:#37313e; --accent:#f0ba79; }
-:root[data-theme=light] { color-scheme:light; --bg:#fffdf9; --panel:#f7f3ed; --ink:#302b38; --muted:#6d6071; --line:#d9cdd8; --accent:#925b2a; }
+:root { color-scheme:dark; --bg:#101116; --ink:#f1ebe6; --muted:#b1a7b8; --line:#37313e; --accent:#f0ba79; }
+:root[data-theme=light] { color-scheme:light; --bg:#fffdf9; --ink:#302b38; --muted:#6d6071; --line:#d9cdd8; --accent:#925b2a; }
 * { box-sizing:border-box; }
-body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.65 system-ui,sans-serif; }
-main { max-width:1040px; padding:30px 28px 64px; margin:auto; }
-header { display:flex; justify-content:space-between; gap:16px; align-items:center; margin-bottom:22px; }
-.eyebrow { font:11px/1.5 ui-monospace,monospace; letter-spacing:.13em; text-transform:uppercase; color:var(--accent); }
-button { background:var(--panel); border:1px solid var(--line); color:var(--ink); padding:9px 13px; border-radius:8px; cursor:pointer; }
+body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.6 system-ui,sans-serif; }
+main { max-width:1100px; padding:24px 24px 40px; margin:auto; }
+header { display:flex; justify-content:space-between; gap:16px; align-items:center; margin-bottom:20px; }
+.eyebrow { font:11px/1.5 ui-monospace,monospace; letter-spacing:.13em; color:var(--accent); }
+button { background:transparent; border:1px solid var(--line); color:var(--ink); padding:8px 12px; border-radius:7px; cursor:pointer; }
 button:focus-visible,a:focus-visible,summary:focus-visible { outline:3px solid var(--accent); outline-offset:4px; }
 .controls { display:flex; gap:8px; }
-img { display:block; width:100%; height:auto; }
-h1 { font-size:clamp(27px,4vw,38px); line-height:1.2; letter-spacing:-.035em; margin:32px 0 18px; }
-.bio { max-width:760px; font-size:18px; color:var(--muted); }
+picture { display:block; margin-bottom:18px; }
+img { display:block; width:100%; height:auto; border-radius:18px; }
 a { color:var(--accent); text-underline-offset:4px; }
-.jump { font-size:14px; margin:22px 0 40px; }
-h2 { font-size:23px; letter-spacing:-.02em; border-bottom:1px solid var(--line); padding-bottom:12px; margin:34px 0 16px; }
-h3 { font-size:22px; line-height:1.35; margin:8px 0 12px; }
-p { margin:0 0 16px; }
-.muted { color:var(--muted); }
-article { padding:23px 0 25px; border-bottom:1px solid var(--line); }
-article:last-child { border-bottom:0; }
-article p { color:var(--muted); max-width:810px; }
-.tags { display:flex; flex-wrap:wrap; gap:8px; }
-.tags span { background:var(--panel); border:1px solid var(--line); border-radius:5px; padding:3px 9px; font:12px/1.5 ui-monospace,monospace; }
-details { margin:20px 0; color:var(--muted); }
-summary { cursor:pointer; color:var(--ink); }
-table { border-collapse:collapse; width:100%; margin-top:16px; }
+details { color:var(--muted); margin:20px 0; }
+summary { cursor:pointer; color:var(--muted); font-size:13px; }
+table { border-collapse:collapse; width:100%; }
 td,th { padding:7px 12px; border-bottom:1px solid var(--line); text-align:left; }
-td:last-child,th:last-child { text-align:right; }
-footer { border-top:1px solid var(--line); margin-top:36px; padding-top:25px; font-size:14px; }
-.caption { font-size:12px; color:var(--muted); margin-top:12px; }
-@media(max-width:560px) { main { padding:18px 16px 40px; } header { align-items:flex-start; } header>.eyebrow { max-width:130px; } .controls { flex-wrap:wrap; justify-content:flex-end; } button { font-size:11px; } .bio { font-size:16px; } h3 { font-size:20px; } }
+footer { color:var(--muted); font-size:11px; }
+@media(max-width:600px) { main { padding:16px 12px 30px; } header>.eyebrow { max-width:120px; } button { font-size:11px; } .controls { flex-wrap:wrap; justify-content:flex-end; } picture { margin-bottom:12px; } }
 </style>
 </head>
 <body><main>
-<header><div class="eyebrow">Midnight Workshop / Profile preview</div><div class="controls"><button id="theme" type="button" aria-pressed="false">Light theme</button><button id="motion" type="button" aria-pressed="false">Static artwork</button></div></header>
-<img id="cover" src="../assets/workshop-dark.svg" alt="Santhosh's illustrated workshop: AI agents, security systems, and developer tools." width="1100" height="550">
-<h1>AI agents. Security systems. Useful tools.</h1><p class="bio">I build agentic AI systems, data-protection workflows, and the tools that connect them. My work spans Python backends, TypeScript interfaces, retrieval pipelines, and browser automation.</p>
-<p class="jump"><a href="#workbench">Explore the workbench</a> &nbsp;·&nbsp; <a href="#languages">See the materials</a> &nbsp;·&nbsp; <a href="../README.md">View README source</a></p>
-<section id="workbench"><h2>On the workbench</h2><p class="muted">Most of my work lives in private repositories. Here is a window into what I build.</p><article><span class="eyebrow">01 / Guard + govern</span><h3>Certificate management and crypto agility</h3><p>Bringing certificate management, cryptographic assessment, and AI-assisted operations into one platform, with a Python API and a React interface.</p><div class="tags"><span>Python</span><span>TypeScript</span><span>FastAPI</span><span>React</span></div></article><article><span class="eyebrow">02 / Reason + act</span><h3>Agents for security and data protection</h3><p>LLM-guided browser exploration, retrieval-backed security assistants, and role-aware data protection workflows. I work on the path from finding evidence to taking a useful next step.</p><div class="tags"><span>Python</span><span>JavaScript</span><span>Playwright</span><span>Pinecone</span></div></article><article><span class="eyebrow">03 / Connect + create</span><h3>MCP tools with tangible outputs</h3><p>Tools that turn an agent&#x27;s work into Word reports and Excel workbooks, with file delivery through cloud storage. Small interfaces that make automation useful beyond the chat window.</p><div class="tags"><span>JavaScript</span><span>Node.js</span><span>MCP</span><span>Supabase</span></div></article></section>
-<section id="languages"><h2>Languages on the workbench</h2><img id="languages-image" src="../assets/languages-dark.svg" alt="Language shares by detected bytes, with values in the expandable table." width="1100" height="220"><details><summary>Read the numbers and how they are measured</summary><table><thead><tr><th>Language</th><th>Share of detected bytes</th></tr></thead><tbody><tr><td>Python</td><td>60.0%</td></tr><tr><td>TypeScript</td><td>24.2%</td></tr><tr><td>CSS</td><td>4.8%</td></tr><tr><td>JavaScript</td><td>3.4%</td></tr><tr><td>HTML</td><td>3.3%</td></tr><tr><td>Other</td><td>4.3%</td></tr></tbody></table><p class="caption">Snapshot: 2026-11-16. 17 selected private repositories. Not proficiency or time spent. Similar code across repositories may be counted more than once. Small languages are grouped as Other; percentages are rounded.</p></details></section>
-<section><h2>Tools I work with</h2><div class="tags"><span>FastAPI</span><span>React</span><span>Playwright</span><span>MCP</span><span>LangChain</span><span>CrewAI</span><span>Pinecone</span><span>Supabase</span></div><details><summary>Elsewhere in the workshop</summary><ul><li>Exploring memory and knowledge sharing across agent crews.</li><li>Building retrieval pipelines for regulatory framework evidence.</li><li>Experimenting with LLM guardrails for sensitive input and prompt injection.</li></ul></details></section>
-<footer><p><strong>The thread through it all:</strong> turning complex systems into tools people can use.</p><p class="muted">Hand-drawn in SVG. Built from a curated snapshot of my work. <a href="https://github.com/SanthoshSamudrala009">Find me on GitHub</a>.</p><p class="caption">This local preview uses the actual profile assets and content. GitHub controls the final Markdown typography and spacing; these preview controls are not part of the README.</p></footer>
+<header><div class="eyebrow">MIDNIGHT WORKSHOP / PREVIEW</div><div class="controls"><button id="theme" type="button" aria-pressed="false">Light theme</button><button id="motion" type="button" aria-pressed="false">Static artwork</button></div></header>
+<picture data-panel="workshop">
+  <source media="(prefers-color-scheme: light)" srcset="../assets/workshop-light.svg">
+  <img src="../assets/workshop-dark.svg" alt="Santhosh&#x27;s Midnight Workshop: AI agents, security systems, and developer tools." width="1100">
+</picture>
+
+<picture data-panel="projects">
+  <source media="(max-width: 600px) and (prefers-color-scheme: light)" srcset="../assets/projects-mobile-light.svg">
+  <source media="(max-width: 600px)" srcset="../assets/projects-mobile-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="../assets/projects-light.svg">
+  <img src="../assets/projects-dark.svg" alt="Three private-work illustrations: certificates and crypto agility; security and data agents; MCP tools producing reports and workbooks." width="1100">
+</picture>
+
+<picture data-panel="languages">
+  <source media="(max-width: 600px) and (prefers-color-scheme: light)" srcset="../assets/languages-mobile-light.svg">
+  <source media="(max-width: 600px)" srcset="../assets/languages-mobile-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="../assets/languages-light.svg">
+  <img src="../assets/languages-dark.svg" alt="Language byte shares: Python 60.0%, TypeScript 24.2%, CSS 4.8%, JavaScript 3.4%, HTML 3.3%, Other 4.3%." width="1100">
+</picture>
+
+<picture data-panel="toolkit">
+  <source media="(max-width: 600px) and (prefers-color-scheme: light)" srcset="../assets/toolkit-mobile-light.svg">
+  <source media="(max-width: 600px)" srcset="../assets/toolkit-mobile-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="../assets/toolkit-light.svg">
+  <img src="../assets/toolkit-dark.svg" alt="Tools: FastAPI, React, Playwright, MCP, LangChain, CrewAI, Pinecone, Supabase." width="1100">
+</picture>
+
+<picture data-panel="experiments">
+  <source media="(max-width: 600px) and (prefers-color-scheme: light)" srcset="../assets/experiments-mobile-light.svg">
+  <source media="(max-width: 600px)" srcset="../assets/experiments-mobile-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="../assets/experiments-light.svg">
+  <img src="../assets/experiments-dark.svg" alt="Side projects: agent memory, evidence retrieval, and LLM guardrails." width="1100">
+</picture>
+<details><summary>Text version &amp; data notes</summary><p>I build agentic AI systems, data-protection workflows, and the tools that connect them. My work spans Python backends, TypeScript interfaces, retrieval pipelines, and browser automation.</p><p><strong>Certificate management and crypto agility</strong> — Bringing certificate management, cryptographic assessment, and AI-assisted operations into one platform, with a Python API and a React interface.</p><p><strong>Agents for security and data protection</strong> — LLM-guided browser exploration, retrieval-backed security assistants, and role-aware data protection workflows. I work on the path from finding evidence to taking a useful next step.</p><p><strong>MCP tools with tangible outputs</strong> — Tools that turn an agent&#x27;s work into Word reports and Excel workbooks, with file delivery through cloud storage. Small interfaces that make automation useful beyond the chat window.</p><table><tr><th>Language</th><th>Byte share</th></tr><tr><td>Python</td><td>60.0%</td></tr><tr><td>TypeScript</td><td>24.2%</td></tr><tr><td>CSS</td><td>4.8%</td></tr><tr><td>JavaScript</td><td>3.4%</td></tr><tr><td>HTML</td><td>3.3%</td></tr><tr><td>Other</td><td>4.3%</td></tr></table><p>2026-11-16 · 17 selected private repositories. GitHub-detected bytes, not proficiency or time spent. Related code can be counted more than once.</p></details>
+<footer><a href="../README.md">README source</a> · GitHub provides its own spacing. Preview controls stay here.</footer>
 </main>
 <script>
 const params=new URLSearchParams(location.search);
@@ -54,8 +68,16 @@ let light=params.get('theme')==='light';
 let still=params.get('static')==='1'||matchMedia('(prefers-reduced-motion: reduce)').matches;
 function update(){
   const tone=light?'light':'dark';document.documentElement.dataset.theme=tone;
-  document.querySelector('#cover').src='../assets/workshop-'+(still?'static-':'')+tone+'.svg';
-  document.querySelector('#languages-image').src='../assets/languages-'+tone+'.svg';
+  document.querySelectorAll('picture').forEach(picture=>{
+    const stem=picture.dataset.panel;
+    picture.querySelectorAll('source').forEach(source=>{
+      const mobile=source.media.includes('max-width');
+      source.media=mobile?'(max-width: 600px)':'(min-width: 601px)';
+      const variant=stem==='workshop'&&still?'static-':mobile?'mobile-':'';
+      source.srcset='../assets/'+stem+'-'+variant+tone+'.svg';
+    });
+    picture.querySelector('img').src='../assets/'+stem+'-'+(stem==='workshop'&&still?'static-':'')+tone+'.svg';
+  });
   const theme=document.querySelector('#theme'),motion=document.querySelector('#motion');
   theme.textContent=light?'Dark theme':'Light theme';theme.setAttribute('aria-pressed',String(light));
   motion.textContent=still?'Play intro':'Static artwork';motion.setAttribute('aria-pressed',String(still));

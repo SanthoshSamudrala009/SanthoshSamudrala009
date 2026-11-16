@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 import re
 import sys
+from visual_panels import projects_svg, languages_svg, toolkit_svg, experiments_svg
 
 ROOT = Path(__file__).resolve().parents[1]
 COLORS = {'Python': '#efbd72', 'TypeScript': '#ad9adb', 'JavaScript': '#a9c690',
@@ -83,14 +84,6 @@ def language_rows(data):
     return [(name, count / total * 100, COLORS.get(name, '#84909b')) for name, count in rows]
 
 
-def text(x, y, value, size=14, fill='#b9aebf', extra=''):
-    return f'<text x="{x}" y="{y}" font-size="{size}" fill="{fill}" {extra}>{escape(str(value))}</text>'
-
-
-def palette(light):
-    return ('#f7f3ed', '#302b38', '#6d6071', '#d9cdd8') if light else ('#15171d', '#f5ede4', '#b9aebf', '#3d3447')
-
-
 def hero(data, light=False, static=False):
     svg = (ROOT / 'templates/workshop.svg').read_text(encoding='utf-8')
     svg = svg.replace('{{NAME}}', escape(data['name']))
@@ -106,58 +99,54 @@ def hero(data, light=False, static=False):
     return '\n'.join(line.rstrip() for line in svg.splitlines()) + '\n'
 
 
-def language_svg(data, light=False):
-    bg, ink, muted, border = palette(light)
-    parts = [f'<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="220" viewBox="0 0 1100 220" role="img" aria-labelledby="title desc"><title id="title">Languages on the workbench</title><desc id="desc">Language shares by GitHub-detected bytes. Exact values are also available in the README table.</desc><style>text {{font-family:Segoe UI,Arial,sans-serif;}}</style><rect x="1" y="1" width="1098" height="218" rx="18" fill="{bg}" stroke="{border}"/>', text(32, 42, 'THE MATERIALS', 12, muted, 'letter-spacing="2"'), text(1068, 42, data['snapshot']['date'] + ' / SNAPSHOT', 12, muted, 'text-anchor="end"')]
-    x = 32.0
-    for _, share, color in language_rows(data):
-        width = 1036 * share / 100
-        parts.append(f'<rect x="{x:.3f}" y="65" width="{width:.3f}" height="18" fill="{color}"/>')
-        x += width
-    for index, (name, share, color) in enumerate(language_rows(data)):
-        x = 32 + index * 173
-        parts.extend([f'<circle cx="{x+5}" cy="118" r="5" fill="{color}"/>', text(x+18, 123, name, 15, ink), text(x, 158, f'{share:.1f}%', 28, ink, 'font-weight="600"')])
-    parts.append(text(32, 198, f"GitHub-detected bytes · {data['snapshot']['repository_count']} selected private repositories · not time spent or proficiency", 13, muted))
-    return ''.join(parts) + '</svg>\n'
-
-
 def md(value):
     return escape(value, quote=False).replace('|', '\\|').replace('*', '\\*').replace('_', '\\_')
 
 
-def picture(stem, alt):
-    return f'<picture>\n  <source media="(prefers-color-scheme: light)" srcset="assets/{stem}-light.svg">\n  <img src="assets/{stem}-dark.svg" alt="{escape(alt, quote=True)}" width="1100">\n</picture>'
+def picture(stem, alt, mobile=True, preview=False):
+    prefix = '../' if preview else ''
+    lines = [f'<picture data-panel="{stem}">']
+    if mobile:
+        lines.extend([f'  <source media="(max-width: 600px) and (prefers-color-scheme: light)" srcset="{prefix}assets/{stem}-mobile-light.svg">',
+                      f'  <source media="(max-width: 600px)" srcset="{prefix}assets/{stem}-mobile-dark.svg">'])
+    lines.extend([f'  <source media="(prefers-color-scheme: light)" srcset="{prefix}assets/{stem}-light.svg">',
+                  f'  <img src="{prefix}assets/{stem}-dark.svg" alt="{escape(alt, quote=True)}" width="1100">', '</picture>'])
+    return '\n'.join(lines)
+
+
+def panels(data, preview=False):
+    language_alt = 'Language byte shares: ' + ', '.join(f'{n} {v:.1f}%' for n, v, _ in language_rows(data)) + '.'
+    specs = [('workshop', f"{data['name']}'s Midnight Workshop: AI agents, security systems, and developer tools.", False),
+             ('projects', 'Three private-work illustrations: certificates and crypto agility; security and data agents; MCP tools producing reports and workbooks.', True),
+             ('languages', language_alt, True), ('toolkit', 'Tools: ' + ', '.join(data['stack']) + '.', True),
+             ('experiments', 'Side projects: agent memory, evidence retrieval, and LLM guardrails.', True)]
+    return '\n\n'.join(picture(stem, alt, mobile, preview) for stem, alt, mobile in specs)
+
+
+def text_version(data):
+    parts = [f"**{md(data['headline'])}**", md(data['bio'])]
+    for project in data['projects']:
+        parts.extend([f"**{md(project['title'])}** — {md(project['summary'])}", ' · '.join(f'`{tech}`' for tech in project['technologies'])])
+    parts.extend(['| Language | Share of detected bytes |\n| --- | ---: |\n' + '\n'.join(f'| {md(name)} | {share:.1f}% |' for name, share, _ in language_rows(data)),
+                  f"Snapshot: **{data['snapshot']['date']}** · **{data['snapshot']['repository_count']} selected private repositories**. Shares are GitHub-detected bytes, not proficiency or time spent. Similar code across repositories can be counted more than once. Small languages are grouped as Other. Percentages are rounded.",
+                  '**Tools:** ' + ', '.join(md(tool) for tool in data['stack']),
+                  '\n'.join('- ' + md(note) for note in data['notes']),
+                  '[Static cover](assets/workshop-static-dark.svg) · [Light static cover](assets/workshop-static-light.svg)'])
+    return '\n\n'.join(parts)
 
 
 def readme(data):
-    parts = ['<!-- Generated from profile.json by scripts/render_profile.py. -->',
-             picture('workshop', "Santhosh's Midnight Workshop: AI agents, security systems, and developer tools."),
-             f"# {md(data['headline'])}", md(data['bio']),
-             '[Explore the workbench](#on-the-workbench) · [See the materials](#languages-on-the-workbench) · [Static artwork](assets/workshop-static-dark.svg)',
-             '## On the workbench',
-             'Most of my work lives in private repositories. Here is a window into what I build.']
-    for index, project in enumerate(data['projects'], 1):
-        parts.extend([f"### {index:02d} / {md(project['label'])}", f"**{md(project['title'])}**", md(project['summary']),
-                      ' · '.join(f'`{tech}`' for tech in project['technologies'])])
-    parts.extend(['## Languages on the workbench', picture('languages', 'Language shares by detected bytes; values and scope are listed below.'),
-                  '<details>\n<summary>Read the numbers and how they are measured</summary>',
-                  '| Language | Share of detected bytes |\n| --- | ---: |\n' + '\n'.join(f'| {md(name)} | {share:.1f}% |' for name, share, _ in language_rows(data)),
-                  f"Snapshot: **{data['snapshot']['date']}** · **{data['snapshot']['repository_count']} selected private repositories**. Shares use GitHub's detected language bytes. They do not measure proficiency or time spent. Similar code in different repositories can be counted more than once. Small languages are grouped as Other. Percentages are rounded.",
-                  '</details>', '## Tools I work with', ' · '.join(f'`{tool}`' for tool in data['stack']),
-                  '<details>\n<summary>Elsewhere in the workshop</summary>', '\n'.join('- ' + md(note) for note in data['notes']), '</details>',
-                  '---', '**The thread through it all:** turning complex systems into tools people can use.',
-                  '<sub>Hand-drawn in SVG. Built from a curated snapshot of my work. ' + f'<a href="https://github.com/{data["handle"]}">Find me on GitHub</a>.</sub>'])
+    parts = ['<!-- Generated from profile.json by scripts/render_profile.py. -->', panels(data),
+             '<details>\n<summary>Text version &amp; data notes</summary>', text_version(data), '</details>']
     return '\n\n'.join(parts) + '\n'
 
 
 def preview(data):
     template = (ROOT / 'templates/preview.html').read_text(encoding='utf-8')
-    cards = ''.join(f'<article><span class="eyebrow">{i:02d} / {escape(p["label"])}</span><h3>{escape(p["title"])}</h3><p>{escape(p["summary"])}</p><div class="tags">' + ''.join(f'<span>{escape(t)}</span>' for t in p['technologies']) + '</div></article>' for i, p in enumerate(data['projects'], 1))
-    replacements = {'NAME': escape(data['name']), 'HEADLINE': escape(data['headline']), 'BIO': escape(data['bio']), 'HANDLE': data['handle'], 'CARDS': cards,
-                    'ROWS': ''.join(f'<tr><td>{escape(n)}</td><td>{v:.1f}%</td></tr>' for n, v, _ in language_rows(data)),
-                    'NOTES': ''.join(f'<li>{escape(n)}</li>' for n in data['notes']),
-                    'STACK': ''.join(f'<span>{escape(t)}</span>' for t in data['stack']),
-                    'DATE': data['snapshot']['date'], 'COUNT': str(data['snapshot']['repository_count'])}
+    accessible = f'<p>{escape(data["bio"])}</p>' + ''.join(f'<p><strong>{escape(p["title"])}</strong> — {escape(p["summary"])}</p>' for p in data['projects'])
+    accessible += '<table><tr><th>Language</th><th>Byte share</th></tr>' + ''.join(f'<tr><td>{escape(n)}</td><td>{v:.1f}%</td></tr>' for n, v, _ in language_rows(data)) + '</table>'
+    accessible += f'<p>{data["snapshot"]["date"]} · {data["snapshot"]["repository_count"]} selected private repositories. GitHub-detected bytes, not proficiency or time spent. Related code can be counted more than once.</p>'
+    replacements = {'NAME': escape(data['name']), 'PANELS': panels(data, preview=True), 'TEXT': accessible}
     return re.sub(r'\{\{([A-Z]+)\}\}', lambda m: replacements[m[1]], template)
 
 
@@ -168,7 +157,12 @@ def outputs(data):
         tone = 'light' if light else 'dark'
         result[f'assets/workshop-{tone}.svg'] = hero(data, light)
         result[f'assets/workshop-static-{tone}.svg'] = hero(data, light, static=True)
-        result[f'assets/languages-{tone}.svg'] = language_svg(data, light)
+        for mobile in (False, True):
+            suffix = ('mobile-' if mobile else '') + tone
+            result[f'assets/projects-{suffix}.svg'] = projects_svg(data, light, mobile)
+            result[f'assets/languages-{suffix}.svg'] = languages_svg(data, language_rows(data), light, mobile)
+            result[f'assets/toolkit-{suffix}.svg'] = toolkit_svg(data, light, mobile)
+            result[f'assets/experiments-{suffix}.svg'] = experiments_svg(data, light, mobile)
     return result
 
 
