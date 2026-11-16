@@ -28,15 +28,31 @@ footer { color:var(--muted); font-size:11px; }
 <body><main>
 <header><div class="eyebrow">MIDNIGHT WORKSHOP / PREVIEW</div><div class="controls"><button id="theme" type="button" aria-pressed="false">Light theme</button><button id="motion" type="button" aria-pressed="false">Static artwork</button></div></header>
 <picture data-panel="workshop">
+  <source media="(max-width: 600px) and (prefers-color-scheme: light)" srcset="../assets/workshop-mobile-light.svg">
+  <source media="(max-width: 600px)" srcset="../assets/workshop-mobile-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="../assets/workshop-light.svg">
-  <img src="../assets/workshop-dark.svg" alt="Santhosh&#x27;s Midnight Workshop: AI agents, security systems, and developer tools." width="1100">
+  <img src="../assets/workshop-dark.svg" alt="Santhosh&#x27;s Midnight Workshop: agentic AI for security operations, data protection, and cryptographic assets." width="1100">
 </picture>
 
 <picture data-panel="projects">
   <source media="(max-width: 600px) and (prefers-color-scheme: light)" srcset="../assets/projects-mobile-light.svg">
   <source media="(max-width: 600px)" srcset="../assets/projects-mobile-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="../assets/projects-light.svg">
-  <img src="../assets/projects-dark.svg" alt="Three private-work illustrations: certificates and crypto agility; security and data agents; MCP tools producing reports and workbooks." width="1100">
+  <img src="../assets/projects-dark.svg" alt="Three private-work illustrations: security intent routing and investigation; reviewed data protection with runtime validation; certificate lifecycle and cryptographic posture assessment." width="1100">
+</picture>
+
+<picture data-panel="toolkit">
+  <source media="(max-width: 600px) and (prefers-color-scheme: light)" srcset="../assets/toolkit-mobile-light.svg">
+  <source media="(max-width: 600px)" srcset="../assets/toolkit-mobile-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="../assets/toolkit-light.svg">
+  <img src="../assets/toolkit-dark.svg" alt="Tools: LangGraph, CrewAI, LangChain, Pinecone, MCP, FastAPI, Playwright, React, Casbin, Supabase." width="1100">
+</picture>
+
+<picture data-panel="experiments">
+  <source media="(max-width: 600px) and (prefers-color-scheme: light)" srcset="../assets/experiments-mobile-light.svg">
+  <source media="(max-width: 600px)" srcset="../assets/experiments-mobile-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="../assets/experiments-light.svg">
+  <img src="../assets/experiments-dark.svg" alt="Supporting tools: MCP reports and workbooks, regulatory evidence retrieval, and agent memory." width="1100">
 </picture>
 
 <picture data-panel="languages">
@@ -45,21 +61,7 @@ footer { color:var(--muted); font-size:11px; }
   <source media="(prefers-color-scheme: light)" srcset="../assets/languages-light.svg">
   <img src="../assets/languages-dark.svg" alt="Language byte shares: Python 60.0%, TypeScript 24.2%, CSS 4.8%, JavaScript 3.4%, HTML 3.3%, Other 4.3%." width="1100">
 </picture>
-
-<picture data-panel="toolkit">
-  <source media="(max-width: 600px) and (prefers-color-scheme: light)" srcset="../assets/toolkit-mobile-light.svg">
-  <source media="(max-width: 600px)" srcset="../assets/toolkit-mobile-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="../assets/toolkit-light.svg">
-  <img src="../assets/toolkit-dark.svg" alt="Tools: FastAPI, React, Playwright, MCP, LangChain, CrewAI, Pinecone, Supabase." width="1100">
-</picture>
-
-<picture data-panel="experiments">
-  <source media="(max-width: 600px) and (prefers-color-scheme: light)" srcset="../assets/experiments-mobile-light.svg">
-  <source media="(max-width: 600px)" srcset="../assets/experiments-mobile-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="../assets/experiments-light.svg">
-  <img src="../assets/experiments-dark.svg" alt="Side projects: agent memory, evidence retrieval, and LLM guardrails." width="1100">
-</picture>
-<details><summary>Text version &amp; data notes</summary><p>I build agentic AI systems, data-protection workflows, and the tools that connect them. My work spans Python backends, TypeScript interfaces, retrieval pipelines, and browser automation.</p><p><strong>Certificate management and crypto agility</strong> — Bringing certificate management, cryptographic assessment, and AI-assisted operations into one platform, with a Python API and a React interface.</p><p><strong>Agents for security and data protection</strong> — LLM-guided browser exploration, retrieval-backed security assistants, and role-aware data protection workflows. I work on the path from finding evidence to taking a useful next step.</p><p><strong>MCP tools with tangible outputs</strong> — Tools that turn an agent&#x27;s work into Word reports and Excel workbooks, with file delivery through cloud storage. Small interfaces that make automation useful beyond the chat window.</p><table><tr><th>Language</th><th>Byte share</th></tr><tr><td>Python</td><td>60.0%</td></tr><tr><td>TypeScript</td><td>24.2%</td></tr><tr><td>CSS</td><td>4.8%</td></tr><tr><td>JavaScript</td><td>3.4%</td></tr><tr><td>HTML</td><td>3.3%</td></tr><tr><td>Other</td><td>4.3%</td></tr></table><p>2026-11-16 · 17 selected private repositories. GitHub-detected bytes, not proficiency or time spent. Related code can be counted more than once.</p></details>
+<details><summary>Text version &amp; data notes</summary><p>I build AI systems that help security teams investigate, protect data, and manage cryptographic assets. My work connects intent routing, retrieval, specialist agents, and operational tools.</p><p><strong>Role-aware agents for security operations</strong> — Natural-language intent routing into log and case retrieval, role-specific analysis, playbooks, and operational tools across SIEM, SOAR, IAM, application security, OT, and firewall workflows.</p><p><strong>From sensitive-data discovery to reviewed protection</strong> — Browser-guided discovery links sensitive fields to application evidence. Reviewed, role-specific policy plans lead to approved Casbin enforcement on an instrumented application, followed by runtime validation.</p><p><strong>Certificate lifecycle and cryptographic posture</strong> — Certificate discovery, requests, approvals, issuance, renewal, and revocation, alongside cryptographic inventories, shared-asset correlation, and rule-based post-quantum readiness assessment.</p><table><tr><th>Language</th><th>Byte share</th></tr><tr><td>Python</td><td>60.0%</td></tr><tr><td>TypeScript</td><td>24.2%</td></tr><tr><td>CSS</td><td>4.8%</td></tr><tr><td>JavaScript</td><td>3.4%</td></tr><tr><td>HTML</td><td>3.3%</td></tr><tr><td>Other</td><td>4.3%</td></tr></table><p>2026-11-16 · 17 selected private repositories. GitHub-detected bytes, not proficiency or time spent. Related code can be counted more than once.</p></details>
 <footer><a href="../README.md">README source</a> · GitHub provides its own spacing. Preview controls stay here.</footer>
 </main>
 <script>
@@ -73,7 +75,7 @@ function update(){
     picture.querySelectorAll('source').forEach(source=>{
       const mobile=source.media.includes('max-width');
       source.media=mobile?'(max-width: 600px)':'(min-width: 601px)';
-      const variant=stem==='workshop'&&still?'static-':mobile?'mobile-':'';
+      const variant=(stem==='workshop'&&still?'static-':'')+(mobile?'mobile-':'');
       source.srcset='../assets/'+stem+'-'+variant+tone+'.svg';
     });
     picture.querySelector('img').src='../assets/'+stem+'-'+(stem==='workshop'&&still?'static-':'')+tone+'.svg';

@@ -1,8 +1,8 @@
 # Maintaining the workshop
 
-The root README is the GitHub profile. `profile.json` contains its edited public text and a dated, aggregate language snapshot. The original cover illustration is in `templates/workshop.svg`. `scripts/visual_panels.py` draws the project illustrations, language gauges, tool pictograms, and experiment panel. Generated SVG variants are committed under `assets/` so they do not depend on a hosted statistics service.
+The root README is the GitHub profile. `profile.json` contains its edited public text and a dated, aggregate language snapshot. `scripts/work_visuals.py` draws the security workflows, agent illustration, grouped technology tiles, supporting tools, and proportional language bar. `scripts/svg_primitives.py` contains the shared palette and drawing primitives. Generated SVG variants are committed under `assets/` so they do not depend on a hosted statistics service.
 
-The default profile is visual; its longer descriptions are in a collapsed text alternative. Each content panel has desktop/mobile and dark/light variants. Compact project titles and pictogram choices are presentation labels in `visual_panels.py`; update them when changing the three project themes. The mobile breakpoint is 600 pixels. `v1.0.0-midnight-workshop` preserves the original profile before this visual redesign.
+The default profile is visual; its longer descriptions are in a collapsed text alternative. Every panel has desktop/mobile and dark/light variants. Compact project titles and workflow diagrams are presentation choices in `work_visuals.py`; update them alongside the three project summaries. The mobile breakpoint is 600 pixels. `v1.0.0-midnight-workshop` preserves the original profile. `v1.1.0-visual-workshop` preserves the previous visual version before the source-informed redesign.
 
 ## Edit and preview
 

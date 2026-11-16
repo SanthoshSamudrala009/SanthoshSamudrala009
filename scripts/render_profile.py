@@ -7,7 +7,7 @@ import json
 from pathlib import Path
 import re
 import sys
-from visual_panels import projects_svg, languages_svg, toolkit_svg, experiments_svg
+from work_visuals import hero_svg, projects_svg, languages_svg, toolkit_svg, experiments_svg
 
 ROOT = Path(__file__).resolve().parents[1]
 COLORS = {'Python': '#efbd72', 'TypeScript': '#ad9adb', 'JavaScript': '#a9c690',
@@ -85,18 +85,7 @@ def language_rows(data):
 
 
 def hero(data, light=False, static=False):
-    svg = (ROOT / 'templates/workshop.svg').read_text(encoding='utf-8')
-    svg = svg.replace('{{NAME}}', escape(data['name']))
-    if light:
-        for old, new in [('#15171d', '#f7f3ed'), ('#443044', '#e6d4e0'),
-                         ('#f6ecdf', '#302b38'), ('#b9aebd', '#6d6071'),
-                         ('#b3a8b7', '#6d6071'), ('#ddd3db', '#473a50'),
-                         ('#9b929f', '#6d6071'), ('#c3a8b5', '#6d6071')]:
-            svg = svg.replace(old, new)
-        svg = svg.replace('fill="#f8bb79"', 'fill="#925b2a"')
-    if static:
-        svg = re.sub(r'<style>.*?</style>', '', svg, flags=re.S)
-    return '\n'.join(line.rstrip() for line in svg.splitlines()) + '\n'
+    return hero_svg(data, light=light, static=static)
 
 
 def md(value):
@@ -116,10 +105,11 @@ def picture(stem, alt, mobile=True, preview=False):
 
 def panels(data, preview=False):
     language_alt = 'Language byte shares: ' + ', '.join(f'{n} {v:.1f}%' for n, v, _ in language_rows(data)) + '.'
-    specs = [('workshop', f"{data['name']}'s Midnight Workshop: AI agents, security systems, and developer tools.", False),
-             ('projects', 'Three private-work illustrations: certificates and crypto agility; security and data agents; MCP tools producing reports and workbooks.', True),
-             ('languages', language_alt, True), ('toolkit', 'Tools: ' + ', '.join(data['stack']) + '.', True),
-             ('experiments', 'Side projects: agent memory, evidence retrieval, and LLM guardrails.', True)]
+    specs = [('workshop', f"{data['name']}'s Midnight Workshop: agentic AI for security operations, data protection, and cryptographic assets.", True),
+             ('projects', 'Three private-work illustrations: security intent routing and investigation; reviewed data protection with runtime validation; certificate lifecycle and cryptographic posture assessment.', True),
+             ('toolkit', 'Tools: ' + ', '.join(data['stack']) + '.', True),
+             ('experiments', 'Supporting tools: MCP reports and workbooks, regulatory evidence retrieval, and agent memory.', True),
+             ('languages', language_alt, True)]
     return '\n\n'.join(picture(stem, alt, mobile, preview) for stem, alt, mobile in specs)
 
 
@@ -157,6 +147,8 @@ def outputs(data):
         tone = 'light' if light else 'dark'
         result[f'assets/workshop-{tone}.svg'] = hero(data, light)
         result[f'assets/workshop-static-{tone}.svg'] = hero(data, light, static=True)
+        result[f'assets/workshop-mobile-{tone}.svg'] = hero_svg(data, light, mobile=True)
+        result[f'assets/workshop-static-mobile-{tone}.svg'] = hero_svg(data, light, mobile=True, static=True)
         for mobile in (False, True):
             suffix = ('mobile-' if mobile else '') + tone
             result[f'assets/projects-{suffix}.svg'] = projects_svg(data, light, mobile)

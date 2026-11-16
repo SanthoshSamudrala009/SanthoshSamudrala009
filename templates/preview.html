@@ -42,7 +42,7 @@ function update(){
     picture.querySelectorAll('source').forEach(source=>{
       const mobile=source.media.includes('max-width');
       source.media=mobile?'(max-width: 600px)':'(min-width: 601px)';
-      const variant=stem==='workshop'&&still?'static-':mobile?'mobile-':'';
+      const variant=(stem==='workshop'&&still?'static-':'')+(mobile?'mobile-':'');
       source.srcset='../assets/'+stem+'-'+variant+tone+'.svg';
     });
     picture.querySelector('img').src='../assets/'+stem+'-'+(stem==='workshop'&&still?'static-':'')+tone+'.svg';
